@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { v4 as uuidv4 } from 'uuid';
 import { EditOutlined, CopyOutlined, DeleteOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons'
+import { format } from 'date-fns';
+
 
 const Manager = () => {
     const ref = useRef();
@@ -68,11 +70,29 @@ const Manager = () => {
     };
 
 
+    // to get current latitude and longitude of current location
+    const [position, setPosition] = useState({ latitude: null, longitude: null });
+
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (success) => {
+                    const { latitude, longitude } = success.coords;
+                    setPosition({ latitude, longitude });
+                },
+                (error) => console.error("Error getting location:", error)
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }, []);
+    
     const savePassword = () => {
         if (form.site.length > 3 && form.username.length > 3 && form.password.length > 3) {
-            const updatedPasswords = [...passwordArray, { ...form, id: uuidv4() }];
+            const updatedPasswords = [...passwordArray, { ...form, id: uuidv4(), time: format(new Date(),'yyyy-MM-dd HH:mm:ss'), latitude: position.latitude, longitude: position.longitude }];
             localStorage.setItem("passwords", JSON.stringify(updatedPasswords));
             setPasswordArray(updatedPasswords);
+            console.log(passwordArray.length, "pass")
             toast('Password saved successfully!!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -83,6 +103,10 @@ const Manager = () => {
                 progress: undefined,
                 theme: "light",
             });
+            console.log(updatedPasswords)
+            const arr=JSON.stringify(updatedPasswords)
+            localStorage.setItem("Array",arr)
+
         } else {
             toast('Password not saved, please enter valid details!!', {
                 position: "top-right",
@@ -133,10 +157,9 @@ const Manager = () => {
         setSearchQuery(e.target.value);
     };
 
-    const filteredPasswords = passwordArray.filter(item =>
+    const filteredPasswords = passwordArray.filter((item) =>
         item.site.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
     return (
         <>
             <ToastContainer
@@ -165,13 +188,13 @@ const Manager = () => {
                 </h1>
                 <p className='text-green-900 text-lg text-center'>Your Own Password Manager.....</p>
                 <div className="text-black flex flex-col p-4 gap-8 items-center">
-                    <input required value={form.site} onChange={handleChange} placeholder="Enter website name or site URL" className="rounded-full border border-green-500 w-full p-4 py-1" type='text' name='site' id=''></input>
+                    <input required value={form.site} onChange={handleChange} placeholder="Enter website name or site URL" className="rounded-full border border-green-500 w-full p-4 py-1" type='text' name='site' id='site'></input>
                     <div className='flex w-full gap-8'>
-                        <input required value={form.username} onChange={handleChange} placeholder="Enter user name" className="rounded-full border border-green-500 w-full p-4 py-1" type='text' name='username' id=''></input>
+                        <input required value={form.username} onChange={handleChange} placeholder="Enter user name" className="rounded-full border border-green-500 w-full p-4 py-1" type='text' name='username' id='useraname'></input>
                         <div className='relative'>
-                            <input ref={passwordRef} required value={form.password} onChange={handleChange} placeholder="Enter Password" className="rounded-full border border-green-500 w-full p-4 py-1" type='password' name='password' id=''></input>
+                            <input ref={passwordRef} required value={form.password} onChange={handleChange} placeholder="Enter Password" className="rounded-full border border-green-500 w-full p-4 py-1" type='password' name='password' id='password'></input>
                             <span className='absolute right-0 cursor-pointer'>
-                            {click1 ? <EyeOutlined onClick={() => handleClick1()} style={{"marginTop":"10px",marginRight:"7px"}}/>: <EyeInvisibleOutlined onClick={() => handleClick1()}style={{"marginTop":"10px",marginRight:"7px"}}/>}
+                                {click1 ? <EyeOutlined onClick={() => handleClick1()} style={{ "marginTop": "10px", marginRight: "7px" }} /> : <EyeInvisibleOutlined onClick={() => handleClick1()} style={{ "marginTop": "10px", marginRight: "7px" }} />}
                             </span>
                         </div>
                     </div>
