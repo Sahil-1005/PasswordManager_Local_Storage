@@ -13,32 +13,28 @@ const Navbar = () => {
                     Password
                     <span className='text-green-500'> Manger / &gt;</span>
                 </div>
-                <div>
-                <Link to='/activitytab'>
-                    <div style={{ marginLeft: "600px" }}>
+                <div className='flex justify-between gap-4'>
+                <div style={{}}>
+                    <Link to='/'>
+                        <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1 p-1'>
+                            <span className='font-bold px-4'>Home Page</span>
+                        </button>
+                    </Link>
+                </div>
+                <div style={{}}>
+                    <Link to='/activitytab'>
                         <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1 p-1'>
                             <span className='font-bold px-4'>Activity Tab</span>
                         </button>
-                    </div>
-                </Link>
+                    </Link>
                 </div>
-                {/* </Link>
-                {/* Menubar items */}
-                {/* <ul>
-                    
-                    <li className='flex gap-4'>
-                        <a className='hover:font-bold' href='/'>Home</a>
-                        <a className='hover:font-bold' href='#'>About</a>
-                        <a className='hover:font-bold' href='#'>Contact</a>
-                        <a className='hover:font-bold' href='#'>LogOut</a>
-                    </li>
-                </ul> */}
                 <div>
                     <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1'>
                         <img className='invert w-10 py-1 px-2' ref={ref} src="/github_icon.png" alt="show" />
                         <a href='https://github.com/Sahil-1005/PasswordManager_Local_Storage/settings'>
                             <span className='font-bold px-4'>GitHub</span></a>
                     </button>
+                </div>
                 </div>
             </div>
         </nav>

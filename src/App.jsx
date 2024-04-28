@@ -15,11 +15,11 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Navbar/><Manager /></>
+      element: <><Navbar/><Manager /><Footer/></>
     },
     {
       path: "/activitytab",
-      element: <><Navbar /><ActivityTab /></>
+      element: <><Navbar /><ActivityTab /><Footer/></>
     }
   ])
   return (
