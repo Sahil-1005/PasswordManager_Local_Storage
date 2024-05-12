@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React,{ useState,useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,8 +8,6 @@ import Footer from './Component/Footer'
 import LoginScreen from './Component/LoginScreen'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ActivityTab from './Component/ActivityTab'
-import CurrentLocation from './Component/CurrentLocation'
-// Main Application
 
 function App() {
   const router = createBrowserRouter([
@@ -20,17 +18,16 @@ function App() {
     {
       path: "/activitytab",
       element: <><Navbar /><ActivityTab /><Footer/></>
+    },
+    {
+      path: "/login",
+      element: <><Navbar/><LoginScreen /><Footer/></>
     }
   ])
   return (
     <>
-      {/* <LoginScreen/> */}
       <div>
-        {/* <Navbar></Navbar>
-        <Manager></Manager>
-        <Footer></Footer> */}
         <RouterProvider router={router} />
-        {/* <CurrentLocation/> */}
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState,useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { useRef } from 'react';
 const Navbar = () => {
@@ -13,15 +13,15 @@ const Navbar = () => {
                     Password
                     <span className='text-green-500'> Manger / &gt;</span>
                 </div>
-                <div className='flex justify-between gap-4'>
-                <div style={{}}>
+                <div className='flex justify-between gap-4'>  
+                <div>
                     <Link to='/'>
                         <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1 p-1'>
                             <span className='font-bold px-4'>Home Page</span>
                         </button>
                     </Link>
                 </div>
-                <div style={{}}>
+                <div>
                     <Link to='/activitytab'>
                         <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1 p-1'>
                             <span className='font-bold px-4'>Activity Tab</span>
@@ -34,6 +34,13 @@ const Navbar = () => {
                         <a href='https://github.com/Sahil-1005/PasswordManager_Local_Storage/settings'>
                             <span className='font-bold px-4'>GitHub</span></a>
                     </button>
+                </div>
+                <div>
+                    <Link to='/login'>
+                        <button className='text-white bg-green-700 my-5 rounded-full flex justify-between items-center ring-white ring-1 p-1'>
+                            <span className='font-bold px-4'>Logout</span>
+                        </button>
+                    </Link>
                 </div>
                 </div>
             </div>
