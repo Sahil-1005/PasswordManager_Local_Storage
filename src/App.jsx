@@ -10,24 +10,25 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ActivityTab from './Component/ActivityTab'
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <><Navbar/><Manager /><Footer/></>
-    },
-    {
-      path: "/activitytab",
-      element: <><Navbar /><ActivityTab /><Footer/></>
-    },
-    {
-      path: "/login",
-      element: <><Navbar/><LoginScreen /><Footer/></>
-    }
-  ])
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <><Navbar/><Manager /><Footer/></>
+  //   },
+  //   {
+  //     path: "/activitytab",
+  //     element: <><Navbar /><ActivityTab /><Footer/></>
+  //   },
+  //   {
+  //     path: "/login",
+  //     element: <><Navbar/><LoginScreen /><Footer/></>
+  //   }
+  // ])
   return (
     <>
       <div>
-        <RouterProvider router={router} />
+        {/* <RouterProvider router={router} /> */}
+        <Manager/>
       </div>
     </>
   )
